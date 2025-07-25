@@ -1,0 +1,254 @@
+/* Refined Typeform-like styling */
+:root {
+    --background: #0d194a;
+    --text: #ffffff;
+    --accent-blue: #aaccff;
+    --accent-green: #4dc950;
+    --muted: #8fa2ff;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: black;    
+    font-family: "Arvo", sans-serif;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    line-height: 1.45;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    background-image: url(./peak.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.container {
+    width: 90%;
+    max-width: 700px;
+}
+
+h1 {
+    font-size: 34px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 60px;
+}
+
+.questions-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Show only one question at a time */
+.question {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transform: translateY(100vh);
+    transition: transform 600ms, opacity 300ms;
+}
+
+.question.current.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.question.current {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.question.previous {
+    transform: translateY(-100vh);
+}
+
+.question h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
+
+.question p {
+    margin: 0 0 28px;
+    font-size: 15px;
+    color: #ccddcc;
+}
+
+/* multiple choice */
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.choice {
+    position: relative;
+    border: 2px solid var(--accent-blue);
+    border-radius: 6px;
+    padding: 12px 16px 11px;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.choice:hover {
+    background: rgba(31, 58, 255, 0.12);
+}
+
+.choice.selected {
+    background: var(--accent-blue);
+    color: var(--text);
+}
+
+.choice input {
+    display: none;
+}
+
+.choice label {
+    cursor: pointer;
+}
+
+/* scale */
+.scale-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+}
+
+.scale-option {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--accent-blue);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--accent-blue);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.scale-option:hover {
+    background: rgba(31, 58, 255, 0.12);
+}
+
+.scale-option.selected {
+    background: var(--accent-blue);
+    color: var(--text);
+}
+
+.scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+/* email */
+.email-input {
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--accent-blue);
+    border-radius: 6px;
+}
+
+.email-input::placeholder {
+    color: #aaa;
+}
+
+/* buttons */
+.submit-btn {
+    display: inline-block;
+    background: var(--accent-blue);
+    margin-top: 20px;
+    margin-left: auto;
+    box-sizing: border-box;
+    color: black;
+    padding: 14px 48px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.submit-btn:hover {
+    background: #3bae46;
+}
+
+.submit-btn:disabled {
+    background: #616161;
+    cursor: not-allowed;
+}
+
+.success-message {
+    background: rgba(77, 201, 80, 0.12);
+    border-left: 4px solid var(--accent-green);
+    padding: 32px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
+.required {
+    color: #ff6161;
+}
+
+@media(max-width:480px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .question h2 {
+        font-size: 20px;
+    }
+
+    .scale-option {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!-- Modified version to capture form submissions and send to Google Sheets -->
+<html lang="en" dir="ltr" translate="no">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Harder - AI Coach Questionnaire</title>
+    <meta content="#1e1e45" name="theme-color">
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <form id="aiCoachForm" class="questions-container">
+            <!-- Question 1: Struggle with Goals -->
+            <div class="question">
+                <h2>We know that you're an absolute unit, but we're all human, so... do you sometimes struggle with
+                    achieving your goals? <span class="required">*</span></h2>
+                <div class="choices">
+                    <div class="choice" onclick="selectChoice('struggle_goals', 'yes_all_time', this)">
+                        <input type="radio" name="struggle_goals" value="Yes, all the time" id="struggle_yes_all">
+                        <label for="struggle_yes_all">Yes, all the time</label>
+                    </div>
+                    <div class="choice" onclick="selectChoice('struggle_goals', 'sometimes', this)">
+                        <input type="radio" name="struggle_goals" value="Sometimes" id="struggle_sometimes">
+                        <label for="struggle_sometimes">Sometimes</label>
+                    </div>
+                    <div class="choice" onclick="selectChoice('struggle_goals', 'crushing_it', this)">
+                        <input type="radio" name="struggle_goals" value="No, I'm crushing it" id="struggle_no">
+                        <label for="struggle_no">No, I'm crushing it</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2: Life Change Scale -->
+            <div class="question">
+                <h2>How much would your life change if you had a coach that redesigned your daily tasks based on your
+                    past experiences? <span class="required">*</span></h2>
+                <p>i.e. suggesting a 10-min yoga session after a long day at work instead of a heavy workout</p>
+                <div class="scale-container">
+                    <div class="scale-option" onclick="selectScale('life_change_scale', '1', this)">1</div>
+                    <div class="scale-option" onclick="selectScale('life_change_scale', '2', this)">2</div>
+                    <div class="scale-option" onclick="selectScale('life_change_scale', '3', this)">3</div>
+                    <div class="scale-option" onclick="selectScale('life_change_scale', '4', this)">4</div>
+                    <div class="scale-option" onclick="selectScale('life_change_scale', '5', this)">5</div>
+                </div>
+                <input type="hidden" name="life_change_scale" id="life_change_scale" required>
+            </div>
+
+            <!-- Question 3: Would Achieve More -->
+            <div class="question">
+                <h2>Do you think you would achieve more if you had a coach that redesigned your tasks for achieving your
+                    goals based on your past experiences? <span class="required">*</span></h2>
+                <p>i.e. suggesting a 5-min yoga session after a long day at work instead of 1hr in the gym.</p>
+                <div class="choices">
+                    <div class="choice" onclick="selectChoice('would_achieve_more', 'yes_absolutely', this)">
+                        <input type="radio" name="would_achieve_more" value="Yes, absolutely" id="achieve_yes">
+                        <label for="achieve_yes">Yes, absolutely</label>
+                    </div>
+                    <div class="choice" onclick="selectChoice('would_achieve_more', 'not_really', this)">
+                        <input type="radio" name="would_achieve_more" value="Not really" id="achieve_no">
+                        <label for="achieve_no">Not really</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4: Achievement Scale (conditional - only shows if Q3 = "Yes, absolutely") -->
+            <div class="question" id="question4">
+                <h2>How much more do you think you would be able to achieve? <span class="required">*</span></h2>
+                <div class="scale-container">
+                    <div class="scale-option" onclick="selectScale('achievement_scale', '1', this)">1</div>
+                    <div class="scale-option" onclick="selectScale('achievement_scale', '2', this)">2</div>
+                    <div class="scale-option" onclick="selectScale('achievement_scale', '3', this)">3</div>
+                    <div class="scale-option" onclick="selectScale('achievement_scale', '4', this)">4</div>
+                    <div class="scale-option" onclick="selectScale('achievement_scale', '5', this)">5</div>
+                </div>
+                <input type="hidden" name="achievement_scale" id="achievement_scale">
+            </div>
+
+            <!-- Question 5: Feeling about AI Coach -->
+            <div class="question">
+                <h2>Now imagine an AI coach that knows your energy, adapts to your schedule, and turns big goals into
+                    tiny, doable steps, all packed into one app - how would you feel? <span class="required">*</span>
+                </h2>
+                <div class="choices">
+                    <div class="choice" onclick="selectChoice('feeling_ai', 'really_excited', this)">
+                        <input type="radio" name="feeling_ai" value="Really Excited" id="feeling_excited">
+                        <label for="feeling_excited">Really Excited</label>
+                    </div>
+                    <div class="choice" onclick="selectChoice('feeling_ai', 'sounds_good', this)">
+                        <input type="radio" name="feeling_ai" value="Sounds Good" id="feeling_good">
+                        <label for="feeling_good">Sounds Good</label>
+                    </div>
+                    <div class="choice" onclick="selectChoice('feeling_ai', 'hate_ai', this)">
+                        <input type="radio" name="feeling_ai" value="I HATE AI" id="feeling_hate">
+                        <label for="feeling_hate">I HATE AI</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Question 6: Email -->
+            <div class="question">
+                <h2>We're building this right now! Wanna try it first - sign up with your email and we'll keep you
+                    updated!</h2>
+                <input type="email" name="email" class="email-input" placeholder="name@example.com" required>
+
+                <button type="submit" class="submit-btn">Submit your answers</button>
+            </div>
+
+            <div class="question">
+                <h2>Thank you for your response!</h2>
+            </div>
+
+            <div class="question">
+                <h2>Based on your past responses we would like you to know that this exact form was built with the assistance of AI</h2>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Configuration - UPDATE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-3UVfWJE4AiTEJOdlOer0BU9OrMUtA_SGz_pv14rkYyo9kFfVCFb08GQu0GDOw8oo/exec';
+
+        // Form data storage
+        let formData = {};
+        let questionOrder = [];
+        let currentQuestionIndex = 0;
+        let isChangingSlides = false;
+
+        function selectChoice(questionName, value, element) {
+            if (isChangingSlides) return;
+            isChangingSlides = true;
+
+            const currentQuestion = document.querySelector('.question.current');
+            currentQuestion.classList.add('disabled');
+
+            // Remove selected class from siblings
+            const siblings = element.parentNode.querySelectorAll('.choice');
+            siblings.forEach(sibling => sibling.classList.remove('selected'));
+
+            // Add selected class to clicked element
+            element.classList.add('selected');
+
+            // Update the radio button
+            const radio = element.querySelector('input[type="radio"]');
+            radio.checked = true;
+
+            // Store the value
+            formData[questionName] = radio.value;
+
+
+            // Auto-advance to next question
+            setTimeout(() => {
+                isChangingSlides = false;
+                nextQuestion();
+            }, 300);
+        }
+
+        function loadQuestion(questionIndex) {
+            const currentQuestion = document.querySelector('.question.current');
+            if (currentQuestion) {
+                currentQuestion.classList.remove('current');
+                currentQuestion.classList.add('previous');
+            }
+            const questions = document.querySelectorAll('.question');
+            questions[questionIndex].classList.add('current');
+            questions[questionIndex].classList.remove('previous');
+            currentQuestionIndex = questionIndex;
+        }
+
+        function selectScale(questionName, value, element) {
+            if (isChangingSlides) return;
+            isChangingSlides = true;
+
+            // Remove selected class from siblings
+            const siblings = element.parentNode.querySelectorAll('.scale-option');
+            siblings.forEach(sibling => sibling.classList.remove('selected'));
+
+            // Add selected class to clicked element
+            element.classList.add('selected');
+
+            // Update the hidden input
+            document.getElementById(questionName).value = value;
+
+            // Store the value
+            formData[questionName] = value;
+
+            // Auto-advance to next question
+            setTimeout(() => {
+                isChangingSlides = false;
+                nextQuestion();
+            }, 300);
+        }
+
+        function nextQuestion() {
+            switch (currentQuestionIndex) {
+                case 0:
+                    {
+                        if (formData.struggle_goals === "No, I'm crushing it") {
+                            loadQuestion(2);
+                        } else {
+                            loadQuestion(1);
+                        }
+                    }
+
+                    break;
+                case 1:
+                    loadQuestion(4);
+                    break;
+                case 2: {
+                    if(formData.would_achieve_more === "Not really") {
+                        loadQuestion(6);
+                    } else {
+                        loadQuestion(3);
+                    }
+                    break;
+                }
+                case 3:
+                    loadQuestion(4);
+                    break;
+                case 4:
+                    if(formData.feeling_ai === "I HATE AI") {
+                        loadQuestion(7);
+                    } else {
+                        loadQuestion(5);
+                    }
+                    break;
+                case 5:
+                    loadQuestion(6);
+                    break;
+            }
+            // if (questionName === 'would_achieve_more') {
+            //     const question4 = document.getElementById('question4');
+
+            //     if (value === 'yes_absolutely') {
+            //         // Show question 4 and add it to the question order
+            //         question4.style.display = 'block';
+            //         if (!questionOrder.includes('question4')) {
+            //             // Insert question 4 right after the current question
+            //             const insertIndex = questionOrder.indexOf(getCurrentQuestionId()) + 1;
+            //             questionOrder.splice(insertIndex, 0, 'question4');
+            //         }
+            //     } else if (value === 'not_really') {
+            //         // Hide question 4 and remove from order
+            //         question4.style.display = 'none';
+            //         question4.classList.remove('current');
+            //         questionOrder = questionOrder.filter(id => id !== 'question4');
+            //         // Clear the achievement scale value
+            //         delete formData.achievement_scale;
+            //         document.getElementById('achievement_scale').value = '';
+            //     }
+            // }
+        }
+
+        function getCurrentQuestionId() {
+            const currentQuestion = document.querySelector('.question.current');
+            return currentQuestion ? currentQuestion.id || `question-${currentQuestionIndex}` : null;
+        }
+
+        // Form submission handler
+        document.getElementById('aiCoachForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Collect all form data
+            const formDataObj = new FormData(this);
+            const data = {};
+
+            // Convert FormData to regular object
+            for (let [key, value] of formDataObj.entries()) {
+                data[key] = value;
+            }
+
+            // Map to the expected format for Google Sheets
+            const submissionData = {
+                struggle_with_goals: data.struggle_goals || '',
+                life_change_scale: data.life_change_scale || '',
+                would_achieve_more: data.would_achieve_more || '',
+                achievement_scale: data.achievement_scale || '',
+                feeling_about_ai: data.feeling_ai || '',
+                email: data.email || '',
+                userAgent: navigator.userAgent,
+                ipAddress: 'Not available (client-side)',
+                timestamp: new Date().toISOString()
+            };
+
+            // Disable submit button
+            const submitBtn = e.target.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                // Send data to Google Apps Script
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(submissionData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    loadQuestion(6);
+                } else {
+                    throw new Error(result.message || 'Unknown error occurred');
+                }
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('There was an error submitting your response. Please try again.');
+
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Questionnaire';
+            }
+        });
+
+        // Initialize progressive question navigation
+        document.addEventListener('DOMContentLoaded', function () {
+            const questions = Array.from(document.querySelectorAll('.question'));
+
+            // Initialize question order (excluding conditional question 4)
+            questionOrder = questions.map((q, i) => q.id || `question-${i}`).filter(id => id !== 'question4');
+
+            // Show first question
+            if (questions.length > 0) {
+                questions[0].classList.add('current');
+            }
+        });
+    </script>
+</body>
+
+</html>
