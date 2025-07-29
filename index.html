@@ -5,23 +5,58 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Harder - AI Coach Questionnaire</title>
+    <meta name="description" content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
     <meta content="#1e1e45" name="theme-color">
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+    
+    <!-- Open Graph Meta Tags (Facebook, WhatsApp, LinkedIn, etc.) -->
+    <meta property="og:title" content="Harder - AI Coach Questionnaire">
+    <meta property="og:description" content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://harder-survey.netlify.app/">
+    <meta property="og:image" content="https://harder-survey.netlify.app/peak1.jpeg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Mountain peak representing achieving goals with AI coaching">
+    <meta property="og:image:secure_url" content="https://harder-survey.netlify.app/peak1.jpeg">
+    <meta property="og:site_name" content="Harder AI Coach">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Harder - AI Coach Questionnaire">
+    <meta name="twitter:description" content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
+    <meta name="twitter:image" content="https://harder-survey.netlify.app/peak1.jpeg">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="Harder AI Coach">
+    <meta name="robots" content="index, follow">
+    
     <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
     <div class="container">
+        <!-- Progress Indicator -->
+        <div class="progress-container">
+            <div class="progress-dot active" data-step="1">1</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="2">2</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="3">3</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="4">4</div>
+        </div>
+        
         <form id="aiCoachForm" class="questions-container">
             <!-- Question 1: Struggle with Goals -->
             <div class="question">
-                <h2>Do you sometimes struggle with
-                    achieving your goals? <span class="required">*</span></h2>
+                <h2>Do you sometimes struggle with achieving your goals? <span class="required">*</span></h2>
                 <div class="choices">
                     <div class="choice" onclick="selectChoice('struggle_goals', 'yes_all_time', this)">
-                        <input type="radio" name="struggle_goals" value="Yes, all the time" id="struggle_yes_all">
+                        <input type="radio" name="struggle_goals" value="often" id="struggle_yes_all">
                         <label for="struggle_yes_all">Yes, often</label>
                     </div>
                     <div class="choice" onclick="selectChoice('struggle_goals', 'sometimes', this)">
@@ -29,7 +64,7 @@
                         <label for="struggle_sometimes">Sometimes</label>
                     </div>
                     <div class="choice" onclick="selectChoice('struggle_goals', 'crushing_it', this)">
-                        <input type="radio" name="struggle_goals" value="No, I'm crushing it" id="struggle_no">
+                        <input type="radio" name="struggle_goals" value="rarely" id="struggle_no">
                         <label for="struggle_no">Rarely</label>
                     </div>
                 </div>
@@ -37,9 +72,22 @@
 
             <!-- Question 2: Life Change Scale -->
             <div class="question">
-                <h2>How much would your life change if you had a coach that redesigned your daily tasks based on your
-                    past experiences? <span class="required">*</span></h2>
-                <p>i.e. suggesting a 10-min yoga session after a long day at work instead of a heavy workout</p>
+                <h2>We're going to give you a hand!</h2>
+                <button class="submit-btn" onclick="nextQuestion()">How?</button>
+            </div>
+
+            <!-- Question 3: Life Change Scale -->
+            <div class="question">
+                <h2>Let's help you achieve your goals faster and more efficiently.</h2>
+                <button class="submit-btn" onclick="nextQuestion()">How?</button>
+            </div>
+
+            <!-- Question 4: Life Change Scale -->
+            <div class="question">
+                <h2>We will generate steps to help you achieve your goals by adapting to your habits, behavior and feedback. How cool is
+                    that? <span class="required">*</span></h2>
+                <p>i.e. Adjust your workout, based on your results, struggles or preferences.
+                    <p>
                 <div class="scale-container">
                     <div class="scale-option" onclick="selectScale('life_change_scale', '1', this)">1</div>
                     <div class="scale-option" onclick="selectScale('life_change_scale', '2', this)">2</div>
@@ -50,74 +98,24 @@
                 <input type="hidden" name="life_change_scale" id="life_change_scale" required>
             </div>
 
-            <!-- Question 3: Would Achieve More -->
-            <div class="question">
-                <h2>Do you think you would achieve more if you had a coach that redesigned your tasks for achieving your
-                    goals based on your past experiences? <span class="required">*</span></h2>
-                <p>i.e. suggesting a 5-min yoga session after a long day at work instead of 1hr in the gym.</p>
-                <div class="choices">
-                    <div class="choice" onclick="selectChoice('would_achieve_more', 'yes_absolutely', this)">
-                        <input type="radio" name="would_achieve_more" value="Yes, absolutely" id="achieve_yes">
-                        <label for="achieve_yes">Yes, absolutely</label>
-                    </div>
-                    <div class="choice" onclick="selectChoice('would_achieve_more', 'not_really', this)">
-                        <input type="radio" name="would_achieve_more" value="Not really" id="achieve_no">
-                        <label for="achieve_no">Not really</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 4: Achievement Scale (conditional - only shows if Q3 = "Yes, absolutely") -->
-            <div class="question" id="question4">
-                <h2>How much more do you think you would be able to achieve? <span class="required">*</span></h2>
-                <div class="scale-container">
-                    <div class="scale-option" onclick="selectScale('achievement_scale', '1', this)">1</div>
-                    <div class="scale-option" onclick="selectScale('achievement_scale', '2', this)">2</div>
-                    <div class="scale-option" onclick="selectScale('achievement_scale', '3', this)">3</div>
-                    <div class="scale-option" onclick="selectScale('achievement_scale', '4', this)">4</div>
-                    <div class="scale-option" onclick="selectScale('achievement_scale', '5', this)">5</div>
-                </div>
-                <input type="hidden" name="achievement_scale" id="achievement_scale">
-            </div>
-
-            <!-- Question 5: Feeling about AI Coach -->
-            <div class="question">
-                <h2>Now imagine an AI coach that knows your energy, adapts to your schedule, and turns big goals into
-                    tiny, doable steps, all packed into one app - how would you feel? <span class="required">*</span>
-                </h2>
-                <div class="choices">
-                    <div class="choice" onclick="selectChoice('feeling_ai', 'really_excited', this)">
-                        <input type="radio" name="feeling_ai" value="Really Excited" id="feeling_excited">
-                        <label for="feeling_excited">Really Excited</label>
-                    </div>
-                    <div class="choice" onclick="selectChoice('feeling_ai', 'sounds_good', this)">
-                        <input type="radio" name="feeling_ai" value="Sounds Good" id="feeling_good">
-                        <label for="feeling_good">Sounds Good</label>
-                    </div>
-                    <div class="choice" onclick="selectChoice('feeling_ai', 'hate_ai', this)">
-                        <input type="radio" name="feeling_ai" value="I HATE AI" id="feeling_hate">
-                        <label for="feeling_hate">I HATE AI</label>
-                    </div>
-                </div>
-            </div>
-
 
             <!-- Question 6: Email -->
             <div class="question">
-                <h2>We're building this right now! Wanna try it first - sign up with your email and we'll keep you
+                <h2>There is an upcoming app that will take care of that - sign up and we'll keep you
                     updated!</h2>
-                <input type="email" name="email" class="email-input" placeholder="name@example.com" required>
+                <input type="email" name="email" class="email-input" placeholder="name@example.com" id="email-input" disabled required>
 
                 <button type="submit" class="submit-btn">Submit your answers</button>
             </div>
 
             <div class="question">
-                <h2>Thank you for your response!</h2>
+                <h2>Thank you for your time!</h2>
             </div>
-
+<!-- 
             <div class="question">
-                <h2>Based on your past responses we would like you to know that this exact form was built with the assistance of AI</h2>
-            </div>
+                <h2>Based on your past responses we would like you to know that this exact form was built with the
+                    assistance of AI</h2>
+            </div> -->
         </form>
     </div>
 
@@ -160,6 +158,96 @@
             }, 300);
         }
 
+        function getDisplayQuestionNumber(questionIndex) {
+            // Map actual question indices to display numbers based on branching logic
+            // Questions 1 and 2 are both branches after question 0, so both show as "2"
+            // Question 5 (email) is not part of the questionnaire, so it stays at step 4
+            switch (questionIndex) {
+                case 0: return 1;  // First question
+                case 1: return 2;  // Branch A after first question
+                case 2: return 2;  // Branch B after first question (same display number)
+                case 3: return 3;  // Third logical question
+                case 4: return 4;  // Fourth logical question
+                case 5: return 4;  // Email question (not part of questionnaire, keep at step 4)
+                default: return 1;
+            }
+        }
+
+        function getQuestionIndexFromDisplayStep(displayStep) {
+            // Map display step numbers back to actual question indices
+            // Handle branching logic - for step 2, choose based on previous answer
+            switch (displayStep) {
+                case 1: return 0;  // First question
+                case 2: 
+                    // For step 2, determine which branch based on previous answer
+                    if (formData.struggle_goals === "rarely") {
+                        return 2;  // Branch B
+                    } else {
+                        return 1;  // Branch A
+                    }
+                case 3: return 3;  // Third logical question
+                case 4: return 4;  // Fourth logical question
+                default: return 0;
+            }
+        }
+
+        function navigateToStep(displayStep) {
+            const targetQuestionIndex = getQuestionIndexFromDisplayStep(displayStep);
+            const currentDisplayStep = getDisplayQuestionNumber(currentQuestionIndex);
+            
+            // Only allow navigation to completed steps or current step
+            if (displayStep <= currentDisplayStep) {
+                loadQuestion(targetQuestionIndex);
+            }
+        }
+
+        function updateProgressIndicator(questionIndex) {
+            const displayNumber = getDisplayQuestionNumber(questionIndex);
+            const dots = document.querySelectorAll('.progress-dot');
+            const lines = document.querySelectorAll('.progress-line');
+            
+            // Reset all dots and lines
+            dots.forEach(dot => {
+                dot.classList.remove('active', 'completed', 'clickable');
+            });
+            lines.forEach(line => {
+                line.classList.remove('completed');
+            });
+            
+            // Special case: if we're on the email question (index 5), show all questionnaire steps as completed
+            if (questionIndex === 5) {
+                // Mark all dots as completed and clickable
+                dots.forEach(dot => {
+                    dot.classList.add('completed', 'clickable');
+                });
+                // Mark all lines as completed
+                lines.forEach(line => {
+                    line.classList.add('completed');
+                });
+                return;
+            }
+            
+            // Mark completed steps and lines
+            for (let i = 1; i < displayNumber; i++) {
+                const dot = document.querySelector(`[data-step="${i}"]`);
+                if (dot) {
+                    dot.classList.add('completed', 'clickable');
+                }
+                
+                // Mark the line before this step as completed
+                if (i > 1) {
+                    const lineIndex = i - 2; // Lines are 0-indexed, steps are 1-indexed
+                    if (lines[lineIndex]) lines[lineIndex].classList.add('completed');
+                }
+            }
+            
+            // Mark current step as active and clickable
+            const currentDot = document.querySelector(`[data-step="${displayNumber}"]`);
+            if (currentDot) {
+                currentDot.classList.add('active', 'clickable');
+            }
+        }
+
         function loadQuestion(questionIndex) {
             const currentQuestion = document.querySelector('.question.current');
             if (currentQuestion) {
@@ -168,8 +256,15 @@
             }
             const questions = document.querySelectorAll('.question');
             questions[questionIndex].classList.add('current');
-            questions[questionIndex].classList.remove('previous');
+            questions[questionIndex].classList.remove('previous', 'disabled');
             currentQuestionIndex = questionIndex;
+            
+            // Update progress indicator
+            updateProgressIndicator(questionIndex);
+            
+            // if(questionIndex === 5) {
+            //     document.getElementById('email-input').disabled = false;
+            // }
         }
 
         function selectScale(questionName, value, element) {
@@ -200,7 +295,7 @@
             switch (currentQuestionIndex) {
                 case 0:
                     {
-                        if (formData.struggle_goals === "No, I'm crushing it") {
+                        if(formData.struggle_goals === "rarely") {
                             loadQuestion(2);
                         } else {
                             loadQuestion(1);
@@ -209,28 +304,15 @@
 
                     break;
                 case 1:
-                    loadQuestion(4);
+                case 2:
+                    loadQuestion(3);
                     break;
-                case 2: {
-                    if(formData.would_achieve_more === "Not really") {
-                        loadQuestion(6);
-                    } else {
-                        loadQuestion(3);
-                    }
-                    break;
-                }
                 case 3:
+                    document.getElementById('email-input').disabled = false;
                     loadQuestion(4);
                     break;
                 case 4:
-                    if(formData.feeling_ai === "I HATE AI") {
-                        loadQuestion(7);
-                    } else {
-                        loadQuestion(5);
-                    }
-                    break;
-                case 5:
-                    loadQuestion(6);
+                    loadQuestion(5);
                     break;
             }
             // if (questionName === 'would_achieve_more') {
@@ -264,6 +346,9 @@
         // Form submission handler
         document.getElementById('aiCoachForm').addEventListener('submit', async function (e) {
             e.preventDefault();
+            if(currentQuestionIndex !== 4) {
+                return;
+            }
 
             // Collect all form data
             const formDataObj = new FormData(this);
@@ -288,9 +373,11 @@
             };
 
             // Disable submit button
-            const submitBtn = e.target.querySelector('.submit-btn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
+            const currentQuestion = document.querySelector('.question.current');
+            currentQuestion.classList.add('disabled');
+            // const submitBtn = e.target.querySelector('.submit-btn');
+            // submitBtn.disabled = true;
+            // submitBtn.textContent = 'Submitting...';
 
             try {
                 // Send data to Google Apps Script
@@ -302,7 +389,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    loadQuestion(6);
+                    loadQuestion(5);
                 } else {
                     throw new Error(result.message || 'Unknown error occurred');
                 }
@@ -324,9 +411,26 @@
             // Initialize question order (excluding conditional question 4)
             questionOrder = questions.map((q, i) => q.id || `question-${i}`).filter(id => id !== 'question4');
 
-            // Show first question
+            // Add click event listeners to progress dots
+            const progressDots = document.querySelectorAll('.progress-dot');
+            progressDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    if (isChangingSlides) return; // Prevent clicks during transitions
+                    
+                    const step = parseInt(this.getAttribute('data-step'));
+                    const currentDisplayStep = getDisplayQuestionNumber(currentQuestionIndex);
+                    
+                    // Only allow navigation to completed steps or current step
+                    if (step <= currentDisplayStep) {
+                        navigateToStep(step);
+                    }
+                });
+            });
+
+            // Show first question and initialize progress indicator
             if (questions.length > 0) {
                 questions[0].classList.add('current');
+                updateProgressIndicator(0); // Initialize progress indicator
             }
         });
     </script>

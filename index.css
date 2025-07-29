@@ -7,6 +7,10 @@
     --muted: #8fa2ff;
 }
 
+html {
+    overflow: hidden;
+}
+
 html,
 body {
     height: 100%;
@@ -14,7 +18,7 @@ body {
 }
 
 body {
-    background-color: black;    
+    background-color: black;
     font-family: "Arvo", sans-serif;
     color: var(--text);
     display: flex;
@@ -27,7 +31,7 @@ body {
 body::after {
     content: "";
     position: absolute;
-    background-image: url(./peak.jpg);
+    background-image: url(./peak1.jpeg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -36,12 +40,83 @@ body::after {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .container {
     width: 90%;
     max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Progress Indicator */
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 40px 0;
+    padding: 0 20px;
+    position: relative;
+    z-index: 100;
+}
+
+.progress-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid var(--muted);
+    color: var(--muted);
+    background: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.progress-dot.clickable:hover {
+    transform: scale(1.1);
+    border-color: var(--accent-blue);
+    background: rgba(31, 58, 255, 0.12);
+}
+
+.progress-dot:not(.clickable) {
+    cursor: default;
+    opacity: 0.6;
+}
+
+.progress-dot:not(.clickable):hover {
+    transform: none;
+}
+
+.progress-dot.active {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: var(--background);
+}
+
+.progress-dot.completed {
+    background: var(--accent-green);
+    border-color: var(--accent-green);
+    color: white;
+}
+
+.progress-line {
+    height: 2px;
+    background: var(--muted);
+    flex: 1;
+    max-width: 40px;
+    margin: 0 8px;
+    transition: background 0.3s ease;
+}
+
+.progress-line.completed {
+    background: var(--accent-green);
 }
 
 h1 {
@@ -54,15 +129,18 @@ h1 {
 .questions-container {
     position: relative;
     height: 100vh;
+    width: 100%;
     overflow: hidden;
 }
 
 /* Show only one question at a time */
 .question {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: fixed;
+    width: 90%;
+    max-width: 700px;
+    top: 101vh;
+    left: 50%;
+    transform: translateX(-50%);
     height: 100%;
 
     display: flex;
@@ -71,8 +149,7 @@ h1 {
     align-items: center;
 
     opacity: 0;
-    transform: translateY(100vh);
-    transition: transform 600ms, opacity 300ms;
+    transition: top 600ms, opacity 300ms;
 }
 
 .question.current.disabled {
@@ -80,14 +157,19 @@ h1 {
     pointer-events: none;
 }
 
+.question.current.disabled .submit-btn {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .question.current {
     display: flex;
-    transform: translateY(0);
+    top: 0;
     opacity: 1;
 }
 
 .question.previous {
-    transform: translateY(-100vh);
+    top: -100vh;
 }
 
 .question h2 {
@@ -250,5 +332,22 @@ h1 {
         width: 40px;
         height: 40px;
         font-size: 14px;
+    }
+
+    /* Progress indicator mobile adjustments */
+    .progress-container {
+        margin: 15px 0 30px 0;
+        padding: 0 10px;
+    }
+
+    .progress-dot {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .progress-line {
+        max-width: 30px;
+        margin: 0 6px;
     }
 }
