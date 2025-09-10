@@ -46,8 +46,6 @@
             <div class="progress-dot" data-step="2">2</div>
             <div class="progress-line"></div>
             <div class="progress-dot" data-step="3">3</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot" data-step="4">4</div>
         </div>
         
         <form id="aiCoachForm" class="questions-container">
@@ -100,26 +98,22 @@
 
 
             <!-- Question 6: Email -->
-            <div class="question">
+            <!-- <div class="question">
                 <h2>There is an upcoming app that will take care of that - sign up and we'll keep you
                     updated!</h2>
                 <input type="email" name="email" class="email-input" placeholder="name@example.com" id="email-input" disabled required>
 
                 <button type="submit" class="submit-btn">Submit your answers</button>
-            </div>
+            </div> -->
 
             <div class="question">
                 <h1 style="margin-bottom:initial;">Thank you for your feedback!</h1>
-                <h3 style="text-align: center; font-weight: normal;">It is impactful to the future of this app and the world! &#127757;
-                    <br>
-                You have now been registered in the "Day Ones" list - new updates and benefits will be coming your way!</h3>
-
+                <h3 style="text-align: center; font-weight: normal;">It is impactful to the future of this app and the world! &#127757;</h3>
 
                 <div id="prolific-message" style="display: none; border: 1px solid var(--accent-blue); padding: 10px 20px; border-radius: 6px; margin-bottom: 20px; flex-direction: column;">
                     <h3>We noticed you come from Prolific. Please click the button below to claim your reward!</h3>
                     <a id="prolific-redirect-button" href="https://app.prolific.com/submissions/complete?cc=CDL3ASTB" style="background: var(--accent-blue); color: black; padding: 10px; border-radius: 6px; text-decoration: none; margin: 10px auto;">Claim Reward &#128176;</a>
                 </div>
-                <h3 style="text-align: center;">We will be in touch soon!</h3>
             </div>
 <!-- 
             <div class="question">
@@ -190,7 +184,6 @@
                 case 2: return 2;  // Branch B after first question (same display number)
                 case 3: return 3;  // Third logical question
                 case 4: return 4;  // Fourth logical question
-                case 5: return 4;  // Email question (not part of questionnaire, keep at step 4)
                 default: return 1;
             }
         }
@@ -208,7 +201,6 @@
                         return 1;  // Branch A
                     }
                 case 3: return 3;  // Third logical question
-                case 4: return 4;  // Fourth logical question
                 default: return 0;
             }
         }
@@ -330,34 +322,9 @@
                     loadQuestion(3);
                     break;
                 case 3:
-                    document.getElementById('email-input').disabled = false;
                     loadQuestion(4);
                     break;
-                case 4:
-                    loadQuestion(5);
-                    break;
             }
-            // if (questionName === 'would_achieve_more') {
-            //     const question4 = document.getElementById('question4');
-
-            //     if (value === 'yes_absolutely') {
-            //         // Show question 4 and add it to the question order
-            //         question4.style.display = 'block';
-            //         if (!questionOrder.includes('question4')) {
-            //             // Insert question 4 right after the current question
-            //             const insertIndex = questionOrder.indexOf(getCurrentQuestionId()) + 1;
-            //             questionOrder.splice(insertIndex, 0, 'question4');
-            //         }
-            //     } else if (value === 'not_really') {
-            //         // Hide question 4 and remove from order
-            //         question4.style.display = 'none';
-            //         question4.classList.remove('current');
-            //         questionOrder = questionOrder.filter(id => id !== 'question4');
-            //         // Clear the achievement scale value
-            //         delete formData.achievement_scale;
-            //         document.getElementById('achievement_scale').value = '';
-            //     }
-            // }
         }
 
         function getCurrentQuestionId() {
