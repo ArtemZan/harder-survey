@@ -276,9 +276,9 @@
             // Update progress indicator
             updateProgressIndicator(questionIndex);
             
-            // if(questionIndex === 5) {
-            //     document.getElementById('email-input').disabled = false;
-            // }
+            if(questionIndex === 4) {
+                submitForm();
+            }
         }
 
         function selectScale(questionName, value, element) {
@@ -333,9 +333,8 @@
         }
 
         // Form submission handler
-        document.getElementById('aiCoachForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-            if(currentQuestionIndex !== 4) {
+        async function submitForm() {
+            if(currentQuestionIndex !== 3) {
                 return;
             }
 
@@ -381,7 +380,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    loadQuestion(5);
+                    loadQuestion(4);
                 } else {
                     throw new Error(result.message || 'Unknown error occurred');
                 }
@@ -394,7 +393,7 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Questionnaire';
             }
-        });
+        }
 
         // Initialize progressive question navigation
         document.addEventListener('DOMContentLoaded', function () {
