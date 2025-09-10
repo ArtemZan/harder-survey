@@ -113,6 +113,12 @@
                 <h3 style="text-align: center; font-weight: normal;">It is impactful to the future of this app and the world! &#127757;
                     <br>
                 You have now been registered in the "Day Ones" list - new updates and benefits will be coming your way!</h3>
+
+
+                <div id="prolific-message" style="display: none; border: 1px solid var(--accent-blue); padding: 10px 20px; border-radius: 6px; margin-bottom: 20px; flex-direction: column;">
+                    <h3>We noticed you come from Prolific. Please click the button below to claim your reward!</h3>
+                    <a id="prolific-redirect-button" href="https://app.prolific.com/submissions/complete?cc=CDL3ASTB" style="background: var(--accent-blue); color: black; padding: 10px; border-radius: 6px; text-decoration: none; margin: 10px auto;">Claim Reward &#128176;</a>
+                </div>
                 <h3 style="text-align: center;">We will be in touch soon!</h3>
             </div>
 <!-- 
@@ -132,6 +138,18 @@
         let questionOrder = [];
         let currentQuestionIndex = 0;
         let isChangingSlides = false;
+
+        // Capture Prolific parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const prolificMeta = {
+            prolific_pid: urlParams.get('PROLIFIC_PID') || '',
+            prolific_study_id: urlParams.get('STUDY_ID') || '',
+            prolific_session_id: urlParams.get('SESSION_ID') || ''
+        };
+
+        if(prolificMeta.prolific_pid) {
+            document.getElementById('prolific-message').style.display = 'flex';
+        }
 
         function selectChoice(questionName, value, element) {
             if (isChangingSlides) return;
@@ -371,6 +389,9 @@
                 achievement_scale: data.achievement_scale || '',
                 feeling_about_ai: data.feeling_ai || '',
                 email: data.email || '',
+                prolific_pid: prolificMeta.prolific_pid,
+                prolific_study_id: prolificMeta.prolific_study_id,
+                prolific_session_id: prolificMeta.prolific_session_id,
                 userAgent: navigator.userAgent,
                 ipAddress: 'Not available (client-side)',
                 timestamp: new Date().toISOString()

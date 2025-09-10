@@ -24,6 +24,9 @@ function doPost(e) {
       addHeaders(sheet);
     }
     
+    // Ensure headers include latest expected set for compatibility with existing sheets
+    ensureSheetHeaders(sheet);
+    
     // Add the form data to the sheet
     addFormData(sheet, data);
     
@@ -97,6 +100,9 @@ function addHeaders(sheet) {
     'Achievement Scale',
     'Feeling about AI Coach',
     'Email',
+    'Prolific PID',
+    'Prolific Study ID',
+    'Prolific Session ID',
     'User Agent',
     'IP Address (if available)'
   ];
@@ -110,23 +116,59 @@ function addHeaders(sheet) {
   headerRange.setFontColor('#ffffff');
 }
 
+function getRequiredHeaders() {
+  return [
+    'Timestamp',
+    'Struggle with Goals',
+    'Life Change Scale (Coach Tasks)',
+    'Would Achieve More (Coach)',
+    'Achievement Scale',
+    'Feeling about AI Coach',
+    'Email',
+    'Prolific PID',
+    'Prolific Study ID',
+    'Prolific Session ID',
+    'User Agent',
+    'IP Address (if available)'
+  ];
+}
+
+/**
+ * Ensures the first row contains all required headers; appends any missing headers at the end.
+ * Returns the up-to-date header list.
+ */
+function ensureSheetHeaders(sheet) {
+  const lastColumn = sheet.getLastColumn();
+  const currentHeaders = lastColumn > 0 ? sheet.getRange(1, 1, 1, lastColumn).getValues()[0] : [];
+  const required = getRequiredHeaders();
+  const missing = required.filter(function(h) { return currentHeaders.indexOf(h) === -1; });
+  if (missing.length > 0) {
+    const newHeaders = currentHeaders.concat(missing);
+    sheet.getRange(1, 1, 1, newHeaders.length).setValues([newHeaders]);
+    return newHeaders;
+  }
+  return currentHeaders;
+}
+
 function addFormData(sheet, data) {
   const timestamp = new Date();
-  
-  // Map the form data to the expected format
-  const rowData = [
-    timestamp,
-    data.struggle_with_goals || '',
-    data.life_change_scale || '',
-    data.would_achieve_more || '',
-    data.achievement_scale || '',
-    data.feeling_about_ai || '',
-    data.email || '',
-    data.userAgent || '',
-    data.ipAddress || ''
-  ];
-  
-  // Add the data to the next available row
+  // Ensure headers are up to date and map values to header order
+  const headers = ensureSheetHeaders(sheet);
+  const valueByHeader = {
+    'Timestamp': timestamp,
+    'Struggle with Goals': data.struggle_with_goals || '',
+    'Life Change Scale (Coach Tasks)': data.life_change_scale || '',
+    'Would Achieve More (Coach)': data.would_achieve_more || '',
+    'Achievement Scale': data.achievement_scale || '',
+    'Feeling about AI Coach': data.feeling_about_ai || '',
+    'Email': data.email || '',
+    'Prolific PID': data.prolific_pid || '',
+    'Prolific Study ID': data.prolific_study_id || '',
+    'Prolific Session ID': data.prolific_session_id || '',
+    'User Agent': data.userAgent || '',
+    'IP Address (if available)': data.ipAddress || ''
+  };
+  const rowData = headers.map(function(h) { return valueByHeader.hasOwnProperty(h) ? valueByHeader[h] : ''; });
   const nextRow = sheet.getLastRow() + 1;
   sheet.getRange(nextRow, 1, 1, rowData.length).setValues([rowData]);
   
