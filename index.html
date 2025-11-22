@@ -48,71 +48,47 @@
             <div class="progress-dot" data-step="3">3</div>
             <div class="progress-line"></div>
             <div class="progress-dot" data-step="4">4</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="5">5</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="6">6</div>
         </div>
         
         <form id="aiCoachForm" class="questions-container">
-            <!-- Question 1: Struggle with Goals -->
             <div class="question">
-                <h2>Do you sometimes struggle with achieving your goals? <span class="required">*</span></h2>
-                <div class="choices">
-                    <div class="choice" onclick="selectChoice('struggle_goals', 'yes_all_time', this)">
-                        <input type="radio" name="struggle_goals" value="often" id="struggle_yes_all">
-                        <label for="struggle_yes_all">Yes, often</label>
-                    </div>
-                    <div class="choice" onclick="selectChoice('struggle_goals', 'sometimes', this)">
-                        <input type="radio" name="struggle_goals" value="Sometimes" id="struggle_sometimes">
-                        <label for="struggle_sometimes">Sometimes</label>
-                    </div>
-                    <div class="choice" onclick="selectChoice('struggle_goals', 'crushing_it', this)">
-                        <input type="radio" name="struggle_goals" value="rarely" id="struggle_no">
-                        <label for="struggle_no">Rarely</label>
-                    </div>
-                </div>
+                <h2>What long term personal or professional goals are you currently working on? <span class="required">*</span></h2>
+                <textarea type="text" name="goals" id="goals" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
-            <!-- Question 2: Life Change Scale -->
             <div class="question">
-                <h2>We're going to give you a hand!</h2>
-                <button class="submit-btn" type="button" onclick="nextQuestion()">How?</button>
+                <h2>Tell us about the last time you worked on that goal. What did you do, and what got in the way? <span class="required">*</span></h2>
+                <textarea type="text" name="last_time_worked" id="last_time_worked" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
-            <!-- Question 3: Life Change Scale -->
             <div class="question">
-                <h2>Let's help you achieve your goals faster and more efficiently.</h2>
-                <button class="submit-btn" type="button" onclick="nextQuestion()">How?</button>
+                <h2>How often has that gotten in the way in the last week? Can you give an example?</h2>
+                <textarea type="text" name="obstacle_frequency" id="obstacle_frequency" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
-            <!-- Question 4: Life Change Scale -->
             <div class="question">
-                <h2>We will generate steps to help you achieve your goals by adapting to your habits, behavior and feedback. How cool is
-                    that? <span class="required">*</span></h2>
-                <p>i.e. Adjust your workout, based on your results, struggles or preferences.
-                    <p>
-                <div class="scale-container">
-                    <div class="scale-option" onclick="selectScale('life_change_scale', '1', this)">1</div>
-                    <div class="scale-option" onclick="selectScale('life_change_scale', '2', this)">2</div>
-                    <div class="scale-option" onclick="selectScale('life_change_scale', '3', this)">3</div>
-                    <div class="scale-option" onclick="selectScale('life_change_scale', '4', this)">4</div>
-                    <div class="scale-option" onclick="selectScale('life_change_scale', '5', this)">5</div>
-                </div>
-                <input type="hidden" name="life_change_scale" id="life_change_scale" required>
+                <h2>When this happens how does it affect your day, work or other plans?</h2>
+                <textarea type="text" name="obstacle_effect" id="obstacle_effect" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
-            <!-- Question 4: Price -->
             <div class="question">
-                <h2>Would a monthly commitment of $10 to Harder feel comfortable for you?</h2>
+                <h2>What have you tried so far to move forward with this goal, and what worked or didn’t work?</h2>
+                <textarea type="text" name="tried_solution" id="tried_solution" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
+            </div>
 
-                <div class="choices">
-                    <div class="choice" onclick="selectChoice('commitment', 'yes', this)">
-                        <input type="radio" name="commitment" value="yes" id="commitment_yes">
-                        <label for="commitment_yes">Yes</label>
-                    </div>
-                    
-                    <div class="choice" onclick="selectChoice('commitment', 'no', this)">
-                        <input type="radio" name="commitment" value="no" id="commitment_no">
-                        <label for="commitment_no">No</label>
-                    </div>
-                </div>
+            <div class="question">
+                <h2>How old are you?</h2>
+                <input type="number" name="age" id="age" min="6" max="100" required class="number-input">
+                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
 
@@ -197,15 +173,7 @@
             // Map actual question indices to display numbers based on branching logic
             // Questions 1 and 2 are both branches after question 0, so both show as "2"
             // Question 5 (email) is not part of the questionnaire, so it stays at step 4
-            switch (questionIndex) {
-                case 0: return 1;  // First question
-                case 1: return 2;  // Branch A after first question
-                case 2: return 2;  // Branch B after first question (same display number)
-                case 3: return 3;  // Third logical question
-                case 4: return 4;  // Fourth logical question
-                case 5: return 5;  // Fifth logical question
-                default: return 1;
-            }
+            return questionIndex + 1;
         }
 
         function getQuestionIndexFromDisplayStep(displayStep) {
@@ -249,18 +217,18 @@
                 line.classList.remove('completed');
             });
             
-            // Special case: if we're on the email question (index 5), show all questionnaire steps as completed
-            if (questionIndex === 5) {
-                // Mark all dots as completed and clickable
-                dots.forEach(dot => {
-                    dot.classList.add('completed', 'clickable');
-                });
-                // Mark all lines as completed
-                lines.forEach(line => {
-                    line.classList.add('completed');
-                });
-                return;
-            }
+            // // Special case: if we're on the email question (index 5), show all questionnaire steps as completed
+            // if (questionIndex === 5) {
+            //     // Mark all dots as completed and clickable
+            //     dots.forEach(dot => {
+            //         dot.classList.add('completed', 'clickable');
+            //     });
+            //     // Mark all lines as completed
+            //     lines.forEach(line => {
+            //         line.classList.add('completed');
+            //     });
+            //     return;
+            // }
             
             // Mark completed steps and lines
             for (let i = 1; i < displayNumber; i++) {
@@ -284,7 +252,7 @@
         }
 
         function loadQuestion(questionIndex) {
-            console.log('Loading question', questionIndex);
+            console.trace('Loading question', questionIndex);
             const currentQuestion = document.querySelector('.question.current');
             if (currentQuestion) {
                 currentQuestion.classList.remove('current');
@@ -326,28 +294,15 @@
 
         async function nextQuestion() {
             console.log('Next question', currentQuestionIndex);
-            switch (currentQuestionIndex) {
-                case 0:
-                    {
-                        if(formData.struggle_goals === "rarely") {
-                            loadQuestion(2);
-                        } else {
-                            loadQuestion(1);
-                        }
-                    }
-
-                    break;
-                case 1:
-                case 2:
-                    loadQuestion(3);
-                    break;
-                case 3:
-                    loadQuestion(4);
-                    break;
-                case 4:
-                    await submitForm();
-                    loadQuestion(5);
-                    break;
+            const valid = document.querySelector('.question.current > textarea, .question.current > input').reportValidity();
+            if(!valid) {
+                return;
+            }
+            if(currentQuestionIndex === 5) {
+                await submitForm();
+            }
+            else {
+                loadQuestion(currentQuestionIndex + 1);
             }
         }
 
@@ -359,7 +314,7 @@
         // Form submission handler
         async function submitForm() {
             console.log('Submitting form');
-            if(currentQuestionIndex !== 4) {
+            if(currentQuestionIndex !== 5) {
                 return;
             }
 
@@ -374,13 +329,12 @@
 
             // Map to the expected format for Google Sheets
             const submissionData = {
-                struggle_with_goals: data.struggle_goals || '',
-                life_change_scale: data.life_change_scale || '',
-                commitment: data.commitment || '',
-                would_achieve_more: data.would_achieve_more || '',
-                achievement_scale: data.achievement_scale || '',
-                feeling_about_ai: data.feeling_ai || '',
-                email: data.email || '',
+                goals: data.goals || '',
+                last_time_worked: data.last_time_worked || '',
+                obstacle_frequency: data.obstacle_frequency || '',
+                obstacle_effect: data.obstacle_effect || '',
+                tried_solution: data.tried_solution || '',
+                age: data.age || '',
                 prolific_pid: prolificMeta.prolific_pid,
                 prolific_study_id: prolificMeta.prolific_study_id,
                 prolific_session_id: prolificMeta.prolific_session_id,
@@ -392,6 +346,8 @@
             // Disable submit button
             const currentQuestion = document.querySelector('.question.current');
             currentQuestion.classList.add('disabled');
+            const progressDots = document.querySelector(".progress-container")
+            progressDots.classList.add('disabled');
             // const submitBtn = e.target.querySelector('.submit-btn');
             // submitBtn.disabled = true;
             // submitBtn.textContent = 'Submitting...';
@@ -406,7 +362,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    loadQuestion(5);
+                    loadQuestion(6);
                 } else {
                     throw new Error(result.message || 'Unknown error occurred');
                 }
