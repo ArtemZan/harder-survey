@@ -159,6 +159,8 @@ h1 {
     border: 1px solid var(--accent-blue);
     border-radius: 6px;
     font-size: 16px;
+    background: transparent;
+    color: white;
 }
 
 .question .number-input {

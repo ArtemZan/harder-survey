@@ -5,13 +5,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Harder - AI Coach Questionnaire</title>
-    <meta name="description" content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
+    <meta name="description"
+        content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
     <meta content="#1e1e45" name="theme-color">
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
-    
+
     <!-- Open Graph Meta Tags (Facebook, WhatsApp, LinkedIn, etc.) -->
     <meta property="og:title" content="Harder - AI Coach Questionnaire">
-    <meta property="og:description" content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
+    <meta property="og:description"
+        content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://harder-survey.netlify.app/">
     <meta property="og:image" content="https://harder-survey.netlify.app/peak1.jpeg">
@@ -22,17 +24,18 @@
     <meta property="og:image:secure_url" content="https://harder-survey.netlify.app/peak1.jpeg">
     <meta property="og:site_name" content="Harder AI Coach">
     <meta property="og:locale" content="en_US">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Harder - AI Coach Questionnaire">
-    <meta name="twitter:description" content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
+    <meta name="twitter:description"
+        content="Help us build the perfect AI coach! Answer 4 quick questions about your goals and get early access to an AI that adapts to your energy and schedule.">
     <meta name="twitter:image" content="https://harder-survey.netlify.app/peak1.jpeg">
-    
+
     <!-- Additional Meta Tags -->
     <meta name="author" content="Harder AI Coach">
     <meta name="robots" content="index, follow">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
@@ -52,36 +55,45 @@
             <div class="progress-dot" data-step="5">5</div>
             <div class="progress-line"></div>
             <div class="progress-dot" data-step="6">6</div>
+            <div class="progress-line"></div>
+            <div class="progress-dot" data-step="7">7</div>
         </div>
-        
+
         <form id="aiCoachForm" class="questions-container">
             <div class="question">
-                <h2>What long term personal or professional goals are you currently working on? <span class="required">*</span></h2>
-                <textarea type="text" name="goals" id="goals" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <h2>What long term personal or professional goals are you currently working on? <span
+                        class="required">*</span></h2>
+                <textarea type="text" name="goals" id="goals" required minlength="10" maxLength="1000"
+                    class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
             <div class="question">
-                <h2>Tell us about the last time you worked on that goal. What did you do, and what got in the way? <span class="required">*</span></h2>
-                <textarea type="text" name="last_time_worked" id="last_time_worked" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <h2>Tell us about the last time you worked on that goal. What did you do, and what got in the way? <span
+                        class="required">*</span></h2>
+                <textarea type="text" name="last_time_worked" id="last_time_worked" required minlength="10"
+                    maxLength="1000" class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
             <div class="question">
                 <h2>How often has that gotten in the way in the last week? Can you give an example?</h2>
-                <textarea type="text" name="obstacle_frequency" id="obstacle_frequency" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <textarea type="text" name="obstacle_frequency" id="obstacle_frequency" required minlength="10"
+                    maxLength="1000" class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
             <div class="question">
                 <h2>When this happens how does it affect your day, work or other plans?</h2>
-                <textarea type="text" name="obstacle_effect" id="obstacle_effect" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <textarea type="text" name="obstacle_effect" id="obstacle_effect" required minlength="10"
+                    maxLength="1000" class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
             <div class="question">
                 <h2>What have you tried so far to move forward with this goal, and what worked or didn’t work?</h2>
-                <textarea type="text" name="tried_solution" id="tried_solution" required minlength="10" maxLength="1000" class="input textarea"></textarea>
+                <textarea type="text" name="tried_solution" id="tried_solution" required minlength="10" maxLength="1000"
+                    class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
@@ -91,6 +103,19 @@
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
+            <div class="question">
+                <h2>Would you use an app to help you solve those problems?</h2>
+                <div class="choices">
+                    <div class="choice" onclick="selectChoice('would_use_harder', 'Yes', this)">
+                        <input type="radio" name="would_use_harder" value="Yes" id="would_use_harder_yes">
+                        <label for="would_use_harder_yes">Yes</label>
+                    </div>
+                    <div class="choice" onclick="selectChoice('would_use_harder', 'No', this)">
+                        <input type="radio" name="would_use_harder" value="No" id="would_use_harder_no">
+                        <label for="would_use_harder_no">No</label>
+                    </div>
+                </div>
+            </div>
 
             <!-- Question 6: Email -->
             <!-- <div class="question">
@@ -103,14 +128,18 @@
 
             <div class="question">
                 <h1 style="margin-bottom:initial;">Thank you for your feedback!</h1>
-                <h3 style="text-align: center; font-weight: normal;">It is impactful to the future of this app and the world! &#127757;</h3>
+                <h3 style="text-align: center; font-weight: normal;">It is impactful to the future of this app and the
+                    world! &#127757;</h3>
 
-                <div id="prolific-message" style="display: none; border: 1px solid var(--accent-blue); padding: 10px 20px; border-radius: 6px; margin-bottom: 20px; flex-direction: column;">
+                <div id="prolific-message"
+                    style="display: none; border: 1px solid var(--accent-blue); padding: 10px 20px; border-radius: 6px; margin-bottom: 20px; flex-direction: column;">
                     <h3>We noticed you come from Prolific. Please click the button below to claim your reward!</h3>
-                    <a id="prolific-redirect-button" href="https://app.prolific.com/submissions/complete?cc=CDL3ASTB" style="background: var(--accent-blue); color: black; padding: 10px; border-radius: 6px; text-decoration: none; margin: 10px auto;">Claim Reward &#128176;</a>
+                    <a id="prolific-redirect-button" href="https://app.prolific.com/submissions/complete?cc=CDL3ASTB"
+                        style="background: var(--accent-blue); color: black; padding: 10px; border-radius: 6px; text-decoration: none; margin: 10px auto;">Claim
+                        Reward &#128176;</a>
                 </div>
             </div>
-<!-- 
+            <!-- 
             <div class="question">
                 <h2>Based on your past responses we would like you to know that this exact form was built with the
                     assistance of AI</h2>
@@ -120,7 +149,7 @@
 
     <script>
         // Configuration - UPDATE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp8sNmP3LXS62tQFxsSW7HV1IbjuudEVP2AxwyDQsNeX3rAn0bRQAUEZbi10E_QEiG/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymwz-WcOz1xBv8w1zENmUDBJ-uoNsBfH3G8Mu4j_434m1e644AU7GprMLSX7XHXOXy/exec';
 
         // Form data storage
         let formData = {};
@@ -136,7 +165,7 @@
             prolific_session_id: urlParams.get('SESSION_ID') || ''
         };
 
-        if(prolificMeta.prolific_pid) {
+        if (prolificMeta.prolific_pid) {
             document.getElementById('prolific-message').style.display = 'flex';
         }
 
@@ -171,8 +200,6 @@
 
         function getDisplayQuestionNumber(questionIndex) {
             // Map actual question indices to display numbers based on branching logic
-            // Questions 1 and 2 are both branches after question 0, so both show as "2"
-            // Question 5 (email) is not part of the questionnaire, so it stays at step 4
             return questionIndex + 1;
         }
 
@@ -181,7 +208,7 @@
             // Handle branching logic - for step 2, choose based on previous answer
             switch (displayStep) {
                 case 1: return 0;  // First question
-                case 2: 
+                case 2:
                     // For step 2, determine which branch based on previous answer
                     if (formData.struggle_goals === "rarely") {
                         return 2;  // Branch B
@@ -197,7 +224,7 @@
         function navigateToStep(displayStep) {
             const targetQuestionIndex = getQuestionIndexFromDisplayStep(displayStep);
             const currentDisplayStep = getDisplayQuestionNumber(currentQuestionIndex);
-            
+
             // Only allow navigation to completed steps or current step
             if (displayStep <= currentDisplayStep) {
                 loadQuestion(targetQuestionIndex);
@@ -208,7 +235,7 @@
             const displayNumber = getDisplayQuestionNumber(questionIndex);
             const dots = document.querySelectorAll('.progress-dot');
             const lines = document.querySelectorAll('.progress-line');
-            
+
             // Reset all dots and lines
             dots.forEach(dot => {
                 dot.classList.remove('active', 'completed', 'clickable');
@@ -216,7 +243,7 @@
             lines.forEach(line => {
                 line.classList.remove('completed');
             });
-            
+
             // // Special case: if we're on the email question (index 5), show all questionnaire steps as completed
             // if (questionIndex === 5) {
             //     // Mark all dots as completed and clickable
@@ -229,21 +256,21 @@
             //     });
             //     return;
             // }
-            
+
             // Mark completed steps and lines
             for (let i = 1; i < displayNumber; i++) {
                 const dot = document.querySelector(`[data-step="${i}"]`);
                 if (dot) {
                     dot.classList.add('completed', 'clickable');
                 }
-                
+
                 // Mark the line before this step as completed
                 if (i > 1) {
                     const lineIndex = i - 2; // Lines are 0-indexed, steps are 1-indexed
                     if (lines[lineIndex]) lines[lineIndex].classList.add('completed');
                 }
             }
-            
+
             // Mark current step as active and clickable
             const currentDot = document.querySelector(`[data-step="${displayNumber}"]`);
             if (currentDot) {
@@ -263,7 +290,7 @@
             questions[questionIndex].classList.add('current');
             questions[questionIndex].classList.remove('previous', 'disabled');
             currentQuestionIndex = questionIndex;
-            
+
             // Update progress indicator
             updateProgressIndicator(questionIndex);
         }
@@ -294,11 +321,12 @@
 
         async function nextQuestion() {
             console.log('Next question', currentQuestionIndex);
-            const valid = document.querySelector('.question.current > textarea, .question.current > input').reportValidity();
-            if(!valid) {
+            const input = document.querySelector('.question.current > textarea, .question.current > input');
+            const valid = !input || input?.reportValidity();
+            if (!valid) {
                 return;
             }
-            if(currentQuestionIndex === 5) {
+            if (currentQuestionIndex === 6) {
                 await submitForm();
             }
             else {
@@ -314,7 +342,7 @@
         // Form submission handler
         async function submitForm() {
             console.log('Submitting form');
-            if(currentQuestionIndex !== 5) {
+            if (currentQuestionIndex !== 6) {
                 return;
             }
 
@@ -335,6 +363,7 @@
                 obstacle_effect: data.obstacle_effect || '',
                 tried_solution: data.tried_solution || '',
                 age: data.age || '',
+                would_use_harder: data.would_use_harder || '',
                 prolific_pid: prolificMeta.prolific_pid,
                 prolific_study_id: prolificMeta.prolific_study_id,
                 prolific_session_id: prolificMeta.prolific_session_id,
@@ -362,7 +391,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    loadQuestion(6);
+                    loadQuestion(7);
                 } else {
                     throw new Error(result.message || 'Unknown error occurred');
                 }
@@ -387,12 +416,12 @@
             // Add click event listeners to progress dots
             const progressDots = document.querySelectorAll('.progress-dot');
             progressDots.forEach(dot => {
-                dot.addEventListener('click', function() {
+                dot.addEventListener('click', function () {
                     if (isChangingSlides) return; // Prevent clicks during transitions
-                    
+
                     const step = parseInt(this.getAttribute('data-step'));
                     const currentDisplayStep = getDisplayQuestionNumber(currentQuestionIndex);
-                    
+
                     // Only allow navigation to completed steps or current step
                     if (step <= currentDisplayStep) {
                         navigateToStep(step);
