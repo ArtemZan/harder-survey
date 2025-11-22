@@ -5,7 +5,7 @@
 
 // IMPORTANT: Replace this with your actual Google Spreadsheet ID
 // You can get this from your spreadsheet URL: https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit
-const SPREADSHEET_ID = '1I1Zw3HtxYwrQO1xF8I-z55psiHjoHDOBp3H40tYCfo0'; // Replace with your actual spreadsheet ID
+const SPREADSHEET_ID = '1F-p05F6QrnMCULnQtcAB_-NIjx_0Z6pBMKS1PaZDzL8'; // Replace with your actual spreadsheet ID
 
 function doPost(e) {
   try {
@@ -65,7 +65,7 @@ function doOptions(e) {
 }
 
 function getOrCreateSheet() {
-  const sheetName = 'AI Coach Questionnaire Responses';
+  const sheetName = 'Sheet1';
   let spreadsheet;
   
   try {
@@ -94,13 +94,12 @@ function getOrCreateSheet() {
 function addHeaders(sheet) {
   const headers = [
     'Timestamp',
-    'Struggle with Goals',
-    'Life Change Scale (Coach Tasks)',
-    'Monthly Commitment ($10) Agree',
-    'Would Achieve More (Coach)',
-    'Achievement Scale',
-    'Feeling about AI Coach',
-    'Email',
+    'Goals',
+    'Last Time Worked',
+    'Obstacle Frequency',
+    'Obstacle Effect',
+    'Tried Solution',
+    'Age',
     'Prolific PID',
     'Prolific Study ID',
     'Prolific Session ID',
@@ -120,13 +119,12 @@ function addHeaders(sheet) {
 function getRequiredHeaders() {
   return [
     'Timestamp',
-    'Struggle with Goals',
-    'Life Change Scale (Coach Tasks)',
-    'Monthly Commitment ($10) Agree',
-    'Would Achieve More (Coach)',
-    'Achievement Scale',
-    'Feeling about AI Coach',
-    'Email',
+    'Goals',
+    'Last Time Worked',
+    'Obstacle Frequency',
+    'Obstacle Effect',
+    'Tried Solution',
+    'Age',
     'Prolific PID',
     'Prolific Study ID',
     'Prolific Session ID',
@@ -159,12 +157,11 @@ function addFormData(sheet, data) {
   const valueByHeader = {
     'Timestamp': timestamp,
     'Struggle with Goals': data.struggle_with_goals || '',
-    'Life Change Scale (Coach Tasks)': data.life_change_scale || '',
-    'Monthly Commitment ($10) Agree': data.commitment || '',
-    'Would Achieve More (Coach)': data.would_achieve_more || '',
-    'Achievement Scale': data.achievement_scale || '',
-    'Feeling about AI Coach': data.feeling_about_ai || '',
-    'Email': data.email || '',
+    'Last Time Worked': data.last_time_worked || '',
+    'Obstacle Frequency': data.obstacle_frequency || '',
+    'Obstacle Effect': data.obstacle_effect || '',
+    'Tried Solution': data.tried_solution || '',
+    'Age': data.age || '',
     'Prolific PID': data.prolific_pid || '',
     'Prolific Study ID': data.prolific_study_id || '',
     'Prolific Session ID': data.prolific_session_id || '',
@@ -184,12 +181,15 @@ function addFormData(sheet, data) {
  */
 function testFormSubmission() {
   const testData = {
-    struggle_with_goals: 'Sometimes',
-    life_change_scale: '8',
-    would_achieve_more: 'Yes, absolutely',
-    achievement_scale: '7',
-    feeling_about_ai: 'Really Excited',
-    email: 'test@example.com',
+    goals: 'Goals',
+    last_time_worked: 'Last Time Worked',
+    obstacle_frequency: 'Obstacle Frequency',
+    obstacle_effect: 'Obstacle Effect',
+    tried_solution: 'Tried Solution',
+    age: '25',
+    prolific_pid: '1234567890',
+    prolific_study_id: '1234567890',
+    prolific_session_id: '1234567890',
     userAgent: 'Test Browser',
     ipAddress: '127.0.0.1'
   };
