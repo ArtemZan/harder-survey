@@ -55,13 +55,11 @@
             <div class="progress-dot" data-step="5">5</div>
             <div class="progress-line"></div>
             <div class="progress-dot" data-step="6">6</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot" data-step="7">7</div>
         </div>
 
         <form id="aiCoachForm" class="questions-container">
             <div class="question">
-                <h2>What long term personal or professional goals are you currently working on? <span
+                <h2>What long term career goals are you currently working on?<span
                         class="required">*</span></h2>
                 <textarea type="text" name="goals" id="goals" required minlength="10" maxLength="1000"
                     class="input textarea"></textarea>
@@ -69,30 +67,30 @@
             </div>
 
             <div class="question">
-                <h2>Tell us about the last time you worked on that goal. What did you do, and what got in the way? <span
+                <h2>What stage of achieving that goal are you on? <span
                         class="required">*</span></h2>
-                <textarea type="text" name="last_time_worked" id="last_time_worked" required minlength="10"
+                <textarea type="text" name="stage" id="stage" required minlength="10"
                     maxLength="1000" class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
             <div class="question">
-                <h2>How often has that gotten in the way in the last week? Can you give an example?</h2>
-                <textarea type="text" name="obstacle_frequency" id="obstacle_frequency" required minlength="10"
+                <h2>What is the main struggle when it comes to achieving that goal?</h2>
+                <textarea type="text" name="struggle" id="struggle" required minlength="10"
                     maxLength="1000" class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
             <div class="question">
-                <h2>When this happens how does it affect your day, work or other plans?</h2>
-                <textarea type="text" name="obstacle_effect" id="obstacle_effect" required minlength="10"
+                <h2>When was the last time you tried to fix this problem? What did you do?</h2>
+                <textarea type="text" name="tried_solution" id="tried_solution" required minlength="10"
                     maxLength="1000" class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
             <div class="question">
-                <h2>What have you tried so far to move forward with this goal, and what worked or didn’t work?</h2>
-                <textarea type="text" name="tried_solution" id="tried_solution" required minlength="10" maxLength="1000"
+                <h2>Do you currently use any tools (apps, systems, methods) to help with this problem? Why or why not?</h2>
+                <textarea type="text" name="tools" id="tools" required minlength="10" maxLength="1000"
                     class="input textarea"></textarea>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
@@ -101,20 +99,6 @@
                 <h2>How old are you?</h2>
                 <input type="number" name="age" id="age" min="6" max="100" required class="number-input">
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
-            </div>
-
-            <div class="question">
-                <h2>Would you use an app to help you solve those problems?</h2>
-                <div class="choices">
-                    <div class="choice" onclick="selectChoice('would_use_harder', 'Yes', this)">
-                        <input type="radio" name="would_use_harder" value="Yes" id="would_use_harder_yes">
-                        <label for="would_use_harder_yes">Yes</label>
-                    </div>
-                    <div class="choice" onclick="selectChoice('would_use_harder', 'No', this)">
-                        <input type="radio" name="would_use_harder" value="No" id="would_use_harder_no">
-                        <label for="would_use_harder_no">No</label>
-                    </div>
-                </div>
             </div>
 
             <!-- Question 6: Email -->
@@ -149,7 +133,9 @@
 
     <script>
         // Configuration - UPDATE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymwz-WcOz1xBv8w1zENmUDBJ-uoNsBfH3G8Mu4j_434m1e644AU7GprMLSX7XHXOXy/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSyPaHZ9effy65ZKWXmvfWvCAtlAgMWU3Cpe0gKK1kfo1EOV_82MDwr2hivfqmKGi-/exec';
+
+        const questionBeforeSubmitIndex = 5;
 
         // Form data storage
         let formData = {};
@@ -326,7 +312,7 @@
             if (!valid) {
                 return;
             }
-            if (currentQuestionIndex === 6) {
+            if (currentQuestionIndex === questionBeforeSubmitIndex) {
                 await submitForm();
             }
             else {
@@ -342,7 +328,7 @@
         // Form submission handler
         async function submitForm() {
             console.log('Submitting form');
-            if (currentQuestionIndex !== 6) {
+            if (currentQuestionIndex !== questionBeforeSubmitIndex) {
                 return;
             }
 
@@ -358,12 +344,11 @@
             // Map to the expected format for Google Sheets
             const submissionData = {
                 goals: data.goals || '',
-                last_time_worked: data.last_time_worked || '',
-                obstacle_frequency: data.obstacle_frequency || '',
-                obstacle_effect: data.obstacle_effect || '',
+                stage: data.stage || '',
+                struggle: data.struggle || '',
                 tried_solution: data.tried_solution || '',
+                tools: data.tools || '',
                 age: data.age || '',
-                would_use_harder: data.would_use_harder || '',
                 prolific_pid: prolificMeta.prolific_pid,
                 prolific_study_id: prolificMeta.prolific_study_id,
                 prolific_session_id: prolificMeta.prolific_session_id,
@@ -391,7 +376,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    loadQuestion(7);
+                    loadQuestion(questionBeforeSubmitIndex + 1);
                 } else {
                     throw new Error(result.message || 'Unknown error occurred');
                 }

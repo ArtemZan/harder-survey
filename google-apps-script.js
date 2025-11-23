@@ -5,7 +5,7 @@
 
 // IMPORTANT: Replace this with your actual Google Spreadsheet ID
 // You can get this from your spreadsheet URL: https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit
-const SPREADSHEET_ID = '1F-p05F6QrnMCULnQtcAB_-NIjx_0Z6pBMKS1PaZDzL8'; // Replace with your actual spreadsheet ID
+const SPREADSHEET_ID = '1qG9HImdJGt4OmABlsHUIXof925idD897sRnzjcfvtKg'; // Replace with your actual spreadsheet ID
 
 function doPost(e) {
   try {
@@ -95,12 +95,11 @@ function addHeaders(sheet) {
   const headers = [
     'Timestamp',
     'Goals',
-    'Last Time Worked',
-    'Obstacle Frequency',
-    'Obstacle Effect',
+    'Stage',
+    'Struggle',
     'Tried Solution',
+    'Tools',
     'Age',
-    'Would Use Harder',
     'Prolific PID',
     'Prolific Study ID',
     'Prolific Session ID',
@@ -121,10 +120,10 @@ function getRequiredHeaders() {
   return [
     'Timestamp',
     'Goals',
-    'Last Time Worked',
-    'Obstacle Frequency',
-    'Obstacle Effect',
+    'Stage',
+    'Struggle',
     'Tried Solution',
+    'Tools',
     'Age',
     'Prolific PID',
     'Prolific Study ID',
@@ -158,12 +157,11 @@ function addFormData(sheet, data) {
   const valueByHeader = {
     'Timestamp': timestamp,
     'Goals': data.goals || '',
-    'Last Time Worked': data.last_time_worked || '',
-    'Obstacle Frequency': data.obstacle_frequency || '',
-    'Obstacle Effect': data.obstacle_effect || '',
+    'Stage': data.stage || '',
+    'Struggle': data.struggle || '',
     'Tried Solution': data.tried_solution || '',
+    'Tools': data.tools || '',
     'Age': data.age || '',
-    'Would Use Harder': data.would_use_harder || '',
     'Prolific PID': data.prolific_pid || '',
     'Prolific Study ID': data.prolific_study_id || '',
     'Prolific Session ID': data.prolific_session_id || '',
@@ -184,12 +182,11 @@ function addFormData(sheet, data) {
 function testFormSubmission() {
   const testData = {
     goals: 'Goals',
-    last_time_worked: 'Last Time Worked',
-    obstacle_frequency: 'Obstacle Frequency',
-    obstacle_effect: 'Obstacle Effect',
+    stage: 'Stage',
+    struggle: 'Struggle',
     tried_solution: 'Tried Solution',
+    tools: 'Tools',
     age: '25',
-    would_use_harder: 'Yes',
     prolific_pid: '1234567890',
     prolific_study_id: '1234567890',
     prolific_session_id: '1234567890',
