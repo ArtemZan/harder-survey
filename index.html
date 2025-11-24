@@ -71,8 +71,12 @@
                             <label for="other">Other</label>
                         </div>
                     </div>
-                    <textarea style="display: none; margin-top: 20px; width: 200px" type="text" name="goal_freetext" id="goal_freetext" required minlength="10" maxLength="1000"
-                    class="input textarea"></textarea>
+
+                    <div>    
+                        <label id="label_goal_freetext" style="display: none; margin-top: 20px;" for="goal_freetext">Explain what kind of goal do you have in few words (up to 20 words)</label>
+                        <textarea style="display: none; width: 100%" type="text" name="goal_freetext" id="goal_freetext" required minlength="10" maxLength="1000"
+                        class="input textarea"></textarea>
+                    </div>
                 </div>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
@@ -159,6 +163,7 @@
             formData[questionName] = radio.value;
 
             if(questionName === 'area') {
+                document.getElementById('label_goal_freetext').style.display = radio.value === 'other' ? 'block' : 'none';
                 document.getElementById('goal_freetext').style.display = radio.value === 'other' ? 'block' : 'none';
                 document.getElementById('goal_freetext').required = radio.value === 'other';
             }
