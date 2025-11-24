@@ -47,51 +47,33 @@
             <div class="progress-dot active" data-step="1">1</div>
             <div class="progress-line"></div>
             <div class="progress-dot" data-step="2">2</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot" data-step="3">3</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot" data-step="4">4</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot" data-step="5">5</div>
-            <div class="progress-line"></div>
-            <div class="progress-dot" data-step="6">6</div>
         </div>
 
         <form id="aiCoachForm" class="questions-container">
             <div class="question">
-                <h2>What long term career goals are you currently working on?<span
-                        class="required">*</span></h2>
-                <textarea type="text" name="goals" id="goals" required minlength="10" maxLength="1000"
+                <h2>What kind of long term goals are you currently working on?<span class="required">*</span></h2>
+                <div style="min-height: 400px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="choices">
+                        <div class="choice" onclick="selectChoice('area', 'career', this)">
+                            <input type="radio" name="area" value="often" id="career">
+                            <label for="career">Career or education</label>
+                        </div>
+                        <div class="choice" onclick="selectChoice('area', 'health', this)">
+                            <input type="radio" name="area" value="health" id="health">
+                            <label for="health">Health or fitness</label>
+                        </div>
+                        <div class="choice" onclick="selectChoice('area', 'business', this)">
+                            <input type="radio" name="area" value="business" id="business">
+                            <label for="business">Business</label>
+                        </div>
+                        <div class="choice" onclick="selectChoice('area', 'other', this)">
+                            <input type="radio" name="area" value="other" id="other">
+                            <label for="other">Other</label>
+                        </div>
+                    </div>
+                    <textarea style="display: none; margin-top: 20px; width: 200px" type="text" name="goal_freetext" id="goal_freetext" required minlength="10" maxLength="1000"
                     class="input textarea"></textarea>
-                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
-            </div>
-
-            <div class="question">
-                <h2>What stage of achieving that goal are you on? <span
-                        class="required">*</span></h2>
-                <textarea type="text" name="stage" id="stage" required minlength="10"
-                    maxLength="1000" class="input textarea"></textarea>
-                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
-            </div>
-
-            <div class="question">
-                <h2>What is the main struggle when it comes to achieving that goal?</h2>
-                <textarea type="text" name="struggle" id="struggle" required minlength="10"
-                    maxLength="1000" class="input textarea"></textarea>
-                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
-            </div>
-
-            <div class="question">
-                <h2>When was the last time you tried to fix this problem? What did you do?</h2>
-                <textarea type="text" name="tried_solution" id="tried_solution" required minlength="10"
-                    maxLength="1000" class="input textarea"></textarea>
-                <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
-            </div>
-
-            <div class="question">
-                <h2>Do you currently use any tools (apps, systems, methods) to help with this problem? Why or why not?</h2>
-                <textarea type="text" name="tools" id="tools" required minlength="10" maxLength="1000"
-                    class="input textarea"></textarea>
+                </div>
                 <button class="submit-btn" type="button" onclick="nextQuestion()">Next</button>
             </div>
 
@@ -133,9 +115,9 @@
 
     <script>
         // Configuration - UPDATE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSyPaHZ9effy65ZKWXmvfWvCAtlAgMWU3Cpe0gKK1kfo1EOV_82MDwr2hivfqmKGi-/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb84ITApRkpBPHCsnyEmvEeZbS7SOUP46P5B_XWa1R2bkShnr1A9Weqec3B3-2IMNd/exec';
 
-        const questionBeforeSubmitIndex = 5;
+        const questionBeforeSubmitIndex = 1;
 
         // Form data storage
         let formData = {};
@@ -157,10 +139,10 @@
 
         function selectChoice(questionName, value, element) {
             if (isChangingSlides) return;
-            isChangingSlides = true;
+            //isChangingSlides = true;
 
-            const currentQuestion = document.querySelector('.question.current');
-            currentQuestion.classList.add('disabled');
+            //const currentQuestion = document.querySelector('.question.current');
+            //currentQuestion.classList.add('disabled');
 
             // Remove selected class from siblings
             const siblings = element.parentNode.querySelectorAll('.choice');
@@ -176,12 +158,17 @@
             // Store the value
             formData[questionName] = radio.value;
 
+            if(questionName === 'area') {
+                document.getElementById('goal_freetext').style.display = radio.value === 'other' ? 'block' : 'none';
+                document.getElementById('goal_freetext').required = radio.value === 'other';
+            }
+
 
             // Auto-advance to next question
-            setTimeout(() => {
-                isChangingSlides = false;
-                nextQuestion();
-            }, 300);
+            // setTimeout(() => {
+            //     isChangingSlides = false;
+            //     nextQuestion();
+            // }, 300);
         }
 
         function getDisplayQuestionNumber(questionIndex) {
@@ -307,7 +294,7 @@
 
         async function nextQuestion() {
             console.log('Next question', currentQuestionIndex);
-            const input = document.querySelector('.question.current > textarea, .question.current > input');
+            const input = document.querySelector('.question.current textarea, .question.current input[type="text"], .question.current input[type="number"]');
             const valid = !input || input?.reportValidity();
             if (!valid) {
                 return;
@@ -343,11 +330,7 @@
 
             // Map to the expected format for Google Sheets
             const submissionData = {
-                goals: data.goals || '',
-                stage: data.stage || '',
-                struggle: data.struggle || '',
-                tried_solution: data.tried_solution || '',
-                tools: data.tools || '',
+                goals: data.area === 'other' ? data.goal_freetext : data.area,
                 age: data.age || '',
                 prolific_pid: prolificMeta.prolific_pid,
                 prolific_study_id: prolificMeta.prolific_study_id,

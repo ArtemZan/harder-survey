@@ -5,7 +5,7 @@
 
 // IMPORTANT: Replace this with your actual Google Spreadsheet ID
 // You can get this from your spreadsheet URL: https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit
-const SPREADSHEET_ID = '1qG9HImdJGt4OmABlsHUIXof925idD897sRnzjcfvtKg'; // Replace with your actual spreadsheet ID
+const SPREADSHEET_ID = '1QLwb0snZuz2WqDCv5ubZAF9cd4S40DmXvtHvs4BIRjo'; // Replace with your actual spreadsheet ID
 
 function doPost(e) {
   try {
@@ -95,10 +95,6 @@ function addHeaders(sheet) {
   const headers = [
     'Timestamp',
     'Goals',
-    'Stage',
-    'Struggle',
-    'Tried Solution',
-    'Tools',
     'Age',
     'Prolific PID',
     'Prolific Study ID',
@@ -120,10 +116,6 @@ function getRequiredHeaders() {
   return [
     'Timestamp',
     'Goals',
-    'Stage',
-    'Struggle',
-    'Tried Solution',
-    'Tools',
     'Age',
     'Prolific PID',
     'Prolific Study ID',
@@ -157,10 +149,6 @@ function addFormData(sheet, data) {
   const valueByHeader = {
     'Timestamp': timestamp,
     'Goals': data.goals || '',
-    'Stage': data.stage || '',
-    'Struggle': data.struggle || '',
-    'Tried Solution': data.tried_solution || '',
-    'Tools': data.tools || '',
     'Age': data.age || '',
     'Prolific PID': data.prolific_pid || '',
     'Prolific Study ID': data.prolific_study_id || '',
